@@ -12,6 +12,8 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
+	glfwWindowHint(GLFW_SAMPLES, 8);
+
 	GLFWwindow* window = glfwCreateWindow(1024, 680, "Computer Graphics Playground", NULL, NULL);
 	if (!window)
 	{

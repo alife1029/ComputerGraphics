@@ -9,5 +9,8 @@ public:
 	~App();
 	void Update(double deltaTime);
 private:
-	ShaderProgram* m_ShaderProgram;
+	ShaderProgram*	m_ShaderProgram;
+	unsigned int	m_VAO, 
+					m_VBO, 
+					m_EBO;
 };
