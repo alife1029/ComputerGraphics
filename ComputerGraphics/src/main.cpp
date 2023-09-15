@@ -38,11 +38,10 @@ int main(int argc, char** argv)
 
 	App* app = new App();
 
+	glfwSwapInterval(1);
+
 	while (!glfwWindowShouldClose(window))
 	{
-		glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
 		app->Update(deltaTime);
 
 		glfwPollEvents();

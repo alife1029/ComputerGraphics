@@ -12,10 +12,11 @@ App::App()
 	m_ShaderProgram = new ShaderProgram("assets/shaders/shader.vs.glsl", "assets/shaders/shader.fs.glsl");
 
 	// Model data
-	const glm::vec3 vertices[] = {
-		{ -0.5f, -0.5f, 0.0f },
-		{  0.5f, -0.5f, 0.0f },
-		{  0.0f,  0.5f, 0.0f }
+	const float vertices[] = {
+		// Position				// Color
+		-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f, 1.0f,
+		 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f, 1.0f,
+		 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f, 1.0f,
 	};
 	const unsigned short indices[] = {0, 1, 2};
 
@@ -27,8 +28,10 @@ App::App()
 	// Create vertex array object
 	glCreateVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (const void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)0);		// Position attrib
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)12);	// Color attrib
 	glEnableVertexArrayAttrib(m_VAO, 0);
+	glEnableVertexArrayAttrib(m_VAO, 1);
 	
 	// Create element array object
 	glCreateBuffers(1, &m_EBO);
@@ -51,6 +54,9 @@ App::~App()
 
 void App::Update(double deltaTime)
 {
+	glClearColor(0.5f, 0.2f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	m_ShaderProgram->Activate();
 
 	glBindVertexArray(m_VAO);
@@ -60,4 +66,6 @@ void App::Update(double deltaTime)
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	std::cout << int(1 / deltaTime) << " FPS" << std::endl;
 }
