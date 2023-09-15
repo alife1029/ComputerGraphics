@@ -92,14 +92,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);glfw3.lib;glad.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)assets\" "$(TargetDir)assets\" /E /Y /I /R</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -109,7 +113,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -118,8 +122,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);glfw3.lib;glad.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)assets\" "$(TargetDir)assets\" /E /Y /I /R</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,14 +135,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);glfw3.lib;glad.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)assets\" "$(TargetDir)assets\" /E /Y /I /R</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,7 +156,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\; $(SolutionDir)Libs\glm\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -153,11 +165,27 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
+      <AdditionalDependencies>$(CoreLibraryDependencies);glfw3.lib;glad.lib</AdditionalDependencies>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)assets\" "$(TargetDir)assets\" /E /Y /I /R</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\renderer\ShaderProgram.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\utils\File.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\renderer\ShaderProgram.hpp" />
+    <ClInclude Include="src\utils\File.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shaders\shader.fs.glsl" />
+    <None Include="assets\shaders\shader.vs.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
