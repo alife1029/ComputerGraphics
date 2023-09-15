@@ -1,3 +1,4 @@
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -13,10 +14,20 @@ int main(int argc, char** argv)
 	if (!window)
 	{
 		std::cout << "Falied to create GLFW window!" << std::endl;
+		glfwTerminate();
 		return -1;
 	}
 
 	glfwMakeContextCurrent(window);
+
+	// Load Modern OpenGL
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to load Modern OpenGL!" << std::endl;
+		glfwDestroyWindow(window);
+		glfwTerminate();
+		return -1;
+	}
 
 	while (!glfwWindowShouldClose(window))
 	{

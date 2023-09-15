@@ -92,13 +92,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)Libs\GLFW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; opengl32.lib; glfw3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)Libs\GLFW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -117,8 +117,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; opengl32.lib; glfw3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,13 +127,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)Libs\GLFW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; opengl32.lib; glfw3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,7 +144,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)Libs\GLFW\include\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\; $(SolutionDir)Libs\GLFW\include\; $(SolutionDir)Libs\glad\include\</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -152,8 +152,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; opengl32.lib; glfw3.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLFW\lib-vc2022\; $(SolutionDir)Libs\glad\lib\</AdditionalLibraryDirectories>
+      <AdditionalDependencies>user32.lib; gdi32.lib; Shell32.lib; msvcrt.lib; LIBCMT.lib; opengl32.lib; glfw3.lib; glad.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
