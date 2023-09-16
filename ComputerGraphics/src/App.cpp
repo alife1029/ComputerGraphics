@@ -84,7 +84,9 @@ App::App()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-	m_Camera.fov = 120.0f;
+	m_Camera.position = { 2.0f, 2.0f, 2.0f };
+	m_Camera.yaw = -135.0f;
+	m_Camera.pitch = -35.0f;
 }
 
 App::~App()
@@ -96,10 +98,24 @@ App::~App()
 	glDeleteVertexArrays(1, &m_VAO);
 }
 
-void App::Update(double deltaTime)
+void App::Update(float deltaTime)
 {
+	// Move camera
+	const float cameraSensitivity = 8.0f;
+	m_Camera.yaw += Input::GetCursorDeltaX() * cameraSensitivity * deltaTime;
+	m_Camera.pitch -= Input::GetCursorDeltaY() * cameraSensitivity * deltaTime;
+	if (m_Camera.pitch > 89.9f) m_Camera.pitch = 89.9f;
+	else if (m_Camera.pitch < -89.9f) m_Camera.pitch = -89.9f;
+
+	// Move camera
+	const float cameraSpeed = 5.0f;
+	if (Input::IsKeyPress(Key::KEY_W)) m_Camera.position += m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPress(Key::KEY_A)) m_Camera.position -= m_Camera.GetRightVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPress(Key::KEY_S)) m_Camera.position -= m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPress(Key::KEY_D)) m_Camera.position += m_Camera.GetRightVector() * deltaTime * cameraSpeed;
+
+	// Update camera
 	m_Camera.Update();
-	std::cout << int(1 / deltaTime) << " FPS" << std::endl;
 }
 
 void App::Render()

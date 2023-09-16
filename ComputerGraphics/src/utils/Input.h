@@ -144,6 +144,7 @@ public:
 	inline static float GetCursorDeltaY();
 
 	static void SetListener(GLFWwindow* window);
+    static void Update();
 
 private:
 	static bool keyStates[348];

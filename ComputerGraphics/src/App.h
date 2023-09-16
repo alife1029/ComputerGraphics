@@ -8,7 +8,7 @@ class App
 public:
 	App();
 	~App();
-	void Update(double deltaTime);
+	void Update(float deltaTime);
 	void Render();
 private:
 	ShaderProgram*	m_ShaderProgram;

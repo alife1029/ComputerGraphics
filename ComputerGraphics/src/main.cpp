@@ -1,6 +1,8 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+
 #include <iostream>
+#include <sstream>
 
 #include "App.h"
 #include "utils/Input.h"
@@ -46,9 +48,13 @@ int main(int argc, char** argv)
 
 	// Enable required OpenGL features
 	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
 
 	double timeStamp = glfwGetTime();
 	double deltaTime = 0.0;
+
+	int lastTitleChange = 0;
+	bool cursorHidden = false;
 
 	// Create app insance
 	App* app = new App();
@@ -62,6 +68,8 @@ int main(int argc, char** argv)
 		app->Update(deltaTime);
 		app->Render();
 
+		Input::Update();
+
 		// Poll events and swap framebuffers
 		glfwPollEvents();
 		glfwSwapBuffers(window);
@@ -69,6 +77,25 @@ int main(int argc, char** argv)
 		// Update time
 		deltaTime = glfwGetTime() - timeStamp;
 		timeStamp = glfwGetTime();
+
+		{
+			// Update Window Title
+			if (int(timeStamp * 5) != lastTitleChange)
+			{
+				std::ostringstream oss;
+				oss << "Computer Graphics Playground (" << int(1 / deltaTime) << " FPS)";
+				std::string newTitle = oss.str();
+				glfwSetWindowTitle(window, newTitle.c_str());
+
+				lastTitleChange = int(timeStamp * 5);
+			}
+
+			if (Input::IsKeyPress(Key::KEY_F11))
+			{
+				cursorHidden = !cursorHidden;
+				glfwSetInputMode(window, GLFW_CURSOR, cursorHidden ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+			}
+		}
 	}
 
 	// Delete app instance

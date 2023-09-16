@@ -14,6 +14,11 @@ void Input::SetListener(GLFWwindow* window)
 	glfwSetCursorPosCallback(window, glfw_cursor_position_callback);	// Curor callback
 }
 
+void Input::Update()
+{
+	cursorDelta = glm::dvec2(0.0f);
+}
+
 // This keyboard callback will be called by GLFW
 void Input::glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
@@ -26,7 +31,14 @@ void Input::glfw_key_callback(GLFWwindow* window, int key, int scancode, int act
 // This cursor callback will be called by GLFW
 void Input::glfw_cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
-	cursorDelta.x = xpos - cursorPos.x;
-	cursorDelta.y = ypos - cursorPos.y;
+	if (cursorPos == glm::dvec2{ 0.0 })
+	{
+		cursorDelta = glm::dvec2{ 0.0 };
+	}
+	else
+	{
+		cursorDelta.x = xpos - cursorPos.x;
+		cursorDelta.y = ypos - cursorPos.y;
+	}
 	cursorPos = { xpos, ypos };
 }
