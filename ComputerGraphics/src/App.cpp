@@ -5,6 +5,8 @@
 
 #include <iostream>
 
+#include "utils/Input.h"
+
 App::App()
 {
 	m_VAO = m_VBO = m_EBO = 0;
@@ -108,4 +110,7 @@ void App::Update(double deltaTime)
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
 	std::cout << int(1 / deltaTime) << " FPS" << std::endl;
+	std::cout << Input::IsKeyPress(Key::KEY_A) << std::endl;
+	std::cout << Input::GetCursorPosX() << ", " << Input::GetCursorPosY() << std::endl;
+	std::cout << Input::GetCursorDeltaX() << ", " << Input::GetCursorDeltaY() << std::endl;
 }

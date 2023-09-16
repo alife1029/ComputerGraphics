@@ -174,14 +174,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\components\Camera.cpp" />
     <ClCompile Include="src\renderer\ShaderProgram.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\utils\File.cpp" />
+    <ClCompile Include="src\utils\Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\components\Camera.hpp" />
     <ClInclude Include="src\renderer\ShaderProgram.hpp" />
     <ClInclude Include="src\utils\File.hpp" />
+    <ClInclude Include="src\utils\Input.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\shader.fs.glsl" />

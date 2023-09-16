@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "App.h"
+#include "utils/Input.h"
 
 int main(int argc, char** argv)
 {
@@ -40,6 +41,8 @@ int main(int argc, char** argv)
 		glfwTerminate();
 		return -1;
 	}
+
+	Input::SetListener(window);
 
 	// Enable required OpenGL features
 	glEnable(GL_DEPTH_TEST);
