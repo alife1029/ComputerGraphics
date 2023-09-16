@@ -13,12 +13,52 @@ App::App()
 
 	// Model data
 	const float vertices[] = {
-		// Position				// Color
-		-0.5f, -0.5f, 0.0f,		1.0f, 0.0f, 0.0f, 1.0f,
-		 0.5f, -0.5f, 0.0f,		0.0f, 1.0f, 0.0f, 1.0f,
-		 0.0f,  0.5f, 0.0f,		0.0f, 0.0f, 1.0f, 1.0f,
+		// Position					// Color
+
+		// FRONT FACE
+		-0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// TOP-LEFT
+
+		// RIGHT FACE
+		 0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f, -0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f, -0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// TOP-RIGHT
+		 0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// TOP-LEFT
+
+		 // LEFT FACE
+		-0.5f, -0.5f, -0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
+		-0.5f, -0.5f,  0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
+		-0.5f,  0.5f,  0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f, -0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// TOP-LEFT
+
+		// TOP FACE
+		-0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
+		 0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// TOP-LEFT
+
+		// BOTTOM FACE
+		-0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
+		 0.5f, -0.5f,  0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f, -0.5f,  0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// TOP-LEFT
+
+		// BACK FACE
+		 0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
+		-0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
+		-0.5f,  0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// TOP-RIGHT
+		 0.5f,  0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// TOP-LEFT
 	};
-	const unsigned short indices[] = {0, 1, 2};
+	const unsigned short indices[] = { 
+		0,  1,  2,  2,  3,  0,	// Front face
+		4,  5,  6,  6,  7,  4,	// Right face
+		8,  9,  10, 10, 11, 8,	// Left face
+		12, 13, 14, 14, 15, 12,	// Top face
+		16, 17, 18, 18, 19, 16,	// Bottom face
+		20, 21, 22, 22, 23, 20,	// Back face
+	};
 
 	// Create vertex buffer
 	glCreateBuffers(1, &m_VBO);
@@ -55,14 +95,14 @@ App::~App()
 void App::Update(double deltaTime)
 {
 	glClearColor(0.5f, 0.2f, 0.3f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_ShaderProgram->Activate();
 
 	glBindVertexArray(m_VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
 
-	glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, (const void*)0);
+	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_SHORT, (const void*)0);
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
