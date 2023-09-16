@@ -1,7 +1,8 @@
 #include "ShaderProgram.hpp"
 
 #include <glad/glad.h>
-#include <string>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <iostream>
 
 #include "../utils/File.hpp"
@@ -70,7 +71,7 @@ void ShaderProgram::Activate() const
 	glUseProgram(m_ProgramID);
 }
 
-inline unsigned int ShaderProgram::GetRendererID() const
+void ShaderProgram::SetUniformMat4(const std::string& varName, const glm::mat4& matrix) const
 {
-	return m_ProgramID;
+	glUniformMatrix4fv(glGetUniformLocation(GetRendererID(), varName.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
 }

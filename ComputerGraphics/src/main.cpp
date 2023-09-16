@@ -58,8 +58,9 @@ int main(int argc, char** argv)
 
 	while (!glfwWindowShouldClose(window))
 	{
-		// Update app
+		// Update & Render app
 		app->Update(deltaTime);
+		app->Render();
 
 		// Poll events and swap framebuffers
 		glfwPollEvents();

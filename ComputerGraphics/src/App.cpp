@@ -83,6 +83,8 @@ App::App()
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+	m_Camera.fov = 120.0f;
 }
 
 App::~App()
@@ -96,10 +98,18 @@ App::~App()
 
 void App::Update(double deltaTime)
 {
+	m_Camera.Update();
+	std::cout << int(1 / deltaTime) << " FPS" << std::endl;
+}
+
+void App::Render()
+{
 	glClearColor(0.5f, 0.2f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	m_ShaderProgram->Activate();
+	m_ShaderProgram->SetUniformMat4("u_ViewMatrix", m_Camera.GetViewMatrix());
+	m_ShaderProgram->SetUniformMat4("u_ProjectionMatrix", m_Camera.GetProjectionMatrix());
 
 	glBindVertexArray(m_VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);
@@ -108,9 +118,4 @@ void App::Update(double deltaTime)
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-
-	std::cout << int(1 / deltaTime) << " FPS" << std::endl;
-	std::cout << Input::IsKeyPress(Key::KEY_A) << std::endl;
-	std::cout << Input::GetCursorPosX() << ", " << Input::GetCursorPosY() << std::endl;
-	std::cout << Input::GetCursorDeltaX() << ", " << Input::GetCursorDeltaY() << std::endl;
 }
