@@ -3,6 +3,7 @@
 #include "renderer/ShaderProgram.hpp"
 #include "renderer/Texture.hpp"
 #include "components/Camera.hpp"
+#include "utils/Window.hpp"
 
 class App
 {
@@ -11,6 +12,8 @@ public:
 	~App();
 	void Update(float deltaTime);
 	void Render();
+public:
+	Window* window;
 private:
 	ShaderProgram*	m_ShaderProgram;
 	Texture*		m_Texture;

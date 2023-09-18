@@ -147,6 +147,10 @@ public:
 	inline static float GetCursorDeltaX();
 	inline static float GetCursorDeltaY();
 
+    inline static bool IsMouseInWindow();
+    inline static bool IsMouseJustEnteredWindow();
+    inline static bool InMouseJustLeftWindow();
+
 	static void SetListener(Window* window);
     static void Update();
 
@@ -154,9 +158,11 @@ private:
 	static bool keyStates[348];
     static bool lastKeyStates[348];
 	static glm::dvec2 cursorDelta, cursorPos;
+    static bool mouseInWindow, lastFrameMouseInWindow;
 private:
 	static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void glfw_cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+    static void glfw_cursor_enter_callback(GLFWwindow* window, int entered);
 };
 
 inline bool Input::IsKeyPressed(Key key)
@@ -208,4 +214,19 @@ inline float Input::GetCursorDeltaX()
 inline float Input::GetCursorDeltaY()
 {
     return static_cast<float>(cursorDelta.y);
+}
+
+inline bool Input::IsMouseInWindow()
+{
+    return mouseInWindow;
+}
+
+inline bool Input::IsMouseJustEnteredWindow()
+{
+    return mouseInWindow && !lastFrameMouseInWindow;
+}
+
+inline bool Input::InMouseJustLeftWindow()
+{
+    return !mouseInWindow && lastFrameMouseInWindow;
 }

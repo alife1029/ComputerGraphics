@@ -1,11 +1,11 @@
-#include "App.h"
+#include "App.hpp"
 
 #include <glad/glad.h>
 #include <glm/vec3.hpp>
 
 #include <iostream>
 
-#include "utils/Input.h"
+#include "utils/Input.hpp"
  
 App::App()
 {
@@ -118,6 +118,7 @@ void App::Update(float deltaTime)
 	if (Input::IsKeyPressed(Key::KEY_D)) m_Camera.position += m_Camera.GetRightVector() * deltaTime * cameraSpeed;
 
 	// Update camera
+	if (window->GetHeight() != 0) m_Camera.aspectRatio = static_cast<float>(window->GetWidth()) / window->GetHeight();
 	m_Camera.Update();
 }
 

@@ -15,10 +15,13 @@ public:
 	void Update();
 
 public:
-	float		fov					= 45.0f;
-	float		yaw				= 0.0f,
+	float		fov					= 45.0f,
+				yaw					= 0.0f,
 				pitch				= 0.0f,
-				roll				= 0.0f;
+				roll				= 0.0f,
+				aspectRatio			= 1.6f,
+				near				= 0.1f,
+				far					= 100.0f;
 	glm::vec3	position			{ 0.0f };
 
 private:

@@ -183,12 +183,12 @@
     <ClCompile Include="src\utils\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\App.h" />
+    <ClInclude Include="src\App.hpp" />
     <ClInclude Include="src\components\Camera.hpp" />
     <ClInclude Include="src\renderer\ShaderProgram.hpp" />
     <ClInclude Include="src\renderer\Texture.hpp" />
     <ClInclude Include="src\utils\File.hpp" />
-    <ClInclude Include="src\utils\Input.h" />
+    <ClInclude Include="src\utils\Input.hpp" />
     <ClInclude Include="src\utils\Window.hpp" />
   </ItemGroup>
   <ItemGroup>

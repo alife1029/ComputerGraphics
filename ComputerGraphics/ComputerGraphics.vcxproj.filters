@@ -47,13 +47,13 @@
     <ClInclude Include="src\renderer\ShaderProgram.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\App.h">
+    <ClInclude Include="src\App.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\components\Camera.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\utils\Input.h">
+    <ClInclude Include="src\utils\Input.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\renderer\Texture.hpp">

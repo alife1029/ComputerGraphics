@@ -4,8 +4,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "App.h"
-#include "utils/Input.h"
+#include "App.hpp"
+#include "utils/Input.hpp"
 #include "utils/Window.hpp"
 
 int main(int argc, char** argv)
@@ -48,9 +48,12 @@ int main(int argc, char** argv)
 
 	// Create app insance
 	App* app = new App();
+	app->window = window;
 
 	// V-Sync
 	glfwSwapInterval(1);
+
+	glfwPollEvents();
 
 	while (!window->ShouldClose())
 	{
@@ -83,6 +86,7 @@ int main(int argc, char** argv)
 			if (Input::IsKeyJustPressed(Key::KEY_F11))
 			{
 				window->ToggleCursorVisibility();
+				window->ToggleFullscreen();
 			}
 		}
 	}
