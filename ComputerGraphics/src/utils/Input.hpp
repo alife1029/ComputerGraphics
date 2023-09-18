@@ -132,6 +132,21 @@ enum class Key
  	KEY_MENU   =348
 };
 
+enum class MouseButton
+{
+    Button1 = 0,
+    Button2 = 1,
+    Button3 = 2,
+    Button4 = 3,
+    Button5 = 4,
+    Button6 = 5,
+    Button7 = 6,
+    Button8 = 7,
+    ButtonLeft = Button1,
+    ButtonRight = Button2,
+    ButtonMiddle = Button3
+};
+
 class Input
 {
 public:
@@ -151,6 +166,10 @@ public:
     inline static bool IsMouseJustEnteredWindow();
     inline static bool InMouseJustLeftWindow();
 
+    inline static bool IsMouseButtonPressed(MouseButton button);
+    inline static bool IsMouseButtonJustPressed(MouseButton button);
+    inline static bool IsMouseButtonJustReleased(MouseButton button);
+
 	static void SetListener(Window* window);
     static void Update();
 
@@ -159,10 +178,13 @@ private:
     static bool lastKeyStates[348];
 	static glm::dvec2 cursorDelta, cursorPos;
     static bool mouseInWindow, lastFrameMouseInWindow;
+    static bool mouseButtonStates[8];
+    static bool lastMouseButtonStates[8];
 private:
 	static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void glfw_cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
     static void glfw_cursor_enter_callback(GLFWwindow* window, int entered);
+    static void glfw_mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
 };
 
 inline bool Input::IsKeyPressed(Key key)
@@ -229,4 +251,19 @@ inline bool Input::IsMouseJustEnteredWindow()
 inline bool Input::InMouseJustLeftWindow()
 {
     return !mouseInWindow && lastFrameMouseInWindow;
+}
+
+inline bool Input::IsMouseButtonPressed(MouseButton button)
+{
+    return mouseButtonStates[static_cast<int>(button)];
+}
+
+inline bool Input::IsMouseButtonJustPressed(MouseButton button)
+{
+    return mouseButtonStates[static_cast<int>(button)] && !lastMouseButtonStates[static_cast<int>(button)];
+}
+
+inline bool Input::IsMouseButtonJustReleased(MouseButton button)
+{
+    return !mouseButtonStates[static_cast<int>(button)] && lastMouseButtonStates[static_cast<int>(button)];
 }

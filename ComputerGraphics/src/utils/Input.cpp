@@ -9,6 +9,8 @@ glm::dvec2 Input::cursorPos = glm::vec2{ 0 };
 glm::dvec2 Input::cursorDelta = glm::vec2{ 0 };
 bool Input::mouseInWindow = true;
 bool Input::lastFrameMouseInWindow = false;
+bool Input::mouseButtonStates[8] = {0};
+bool Input::lastMouseButtonStates[8] = { 0 };
 
 // Set listeners
 void Input::SetListener(Window* window)
@@ -16,6 +18,7 @@ void Input::SetListener(Window* window)
 	glfwSetKeyCallback(window->m_WindowHandle, glfw_key_callback);						// Key callback
 	glfwSetCursorPosCallback(window->m_WindowHandle, glfw_cursor_position_callback);	// Curor callback
 	glfwSetCursorEnterCallback(window->m_WindowHandle, glfw_cursor_enter_callback);		// Cursor enter/leave callback
+	glfwSetMouseButtonCallback(window->m_WindowHandle, glfw_mouse_button_callback);		// Mouse button callback
 
 	if (!glfwGetWindowAttrib(window->m_WindowHandle, GLFW_HOVERED))
 	{
@@ -28,6 +31,10 @@ void Input::Update()
 	// Copy current keystates to the last key states
 	for (size_t i = 0; i < std::size(keyStates); i++)
 		lastKeyStates[i] = keyStates[i];
+
+	// Copy current mouse button states to the last mouse button states
+	for (size_t i = 0; i < std::size(mouseButtonStates); i++)
+		lastMouseButtonStates[i] = mouseButtonStates[i];
 
 	cursorDelta = glm::dvec2(0.0f);
 	lastFrameMouseInWindow = mouseInWindow;
@@ -60,4 +67,9 @@ void Input::glfw_cursor_position_callback(GLFWwindow* window, double xpos, doubl
 void Input::glfw_cursor_enter_callback(GLFWwindow* window, int entered)
 {
 	mouseInWindow = entered != 0;
+}
+
+void Input::glfw_mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	mouseButtonStates[button] = static_cast<bool>(action);
 }

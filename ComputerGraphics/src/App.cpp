@@ -103,12 +103,15 @@ App::~App()
 
 void App::Update(float deltaTime)
 {
-	// Move camera
-	const float cameraSensitivity = 8.0f;
-	m_Camera.yaw += Input::GetCursorDeltaX() * cameraSensitivity * deltaTime;
-	m_Camera.pitch -= Input::GetCursorDeltaY() * cameraSensitivity * deltaTime;
-	if (m_Camera.pitch > 89.9f) m_Camera.pitch = 89.9f;
-	else if (m_Camera.pitch < -89.9f) m_Camera.pitch = -89.9f;
+	// Rotate camera
+	if (Input::IsMouseButtonPressed(MouseButton::ButtonRight))
+	{
+		const float cameraSensitivity = 8.0f;
+		m_Camera.yaw += Input::GetCursorDeltaX() * cameraSensitivity * deltaTime;
+		m_Camera.pitch -= Input::GetCursorDeltaY() * cameraSensitivity * deltaTime;
+		if (m_Camera.pitch > 89.9f) m_Camera.pitch = 89.9f;
+		else if (m_Camera.pitch < -89.9f) m_Camera.pitch = -89.9f;
+	}
 
 	// Move camera
 	const float cameraSpeed = 5.0f;
