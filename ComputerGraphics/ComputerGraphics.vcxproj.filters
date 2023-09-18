@@ -27,6 +27,15 @@
     <ClCompile Include="src\App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\components\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\utils\File.hpp">
@@ -38,9 +47,41 @@
     <ClInclude Include="src\App.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\components\Camera.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utils\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\Texture.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="assets\shaders\shader.vs.glsl" />
     <None Include="assets\shaders\shader.fs.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\textures\brick\AO.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\BUMP.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\COLOR.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\DISP.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\IDMAP.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\NORMAL.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\textures\brick\ROUGHNESS.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

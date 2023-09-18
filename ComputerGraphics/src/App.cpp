@@ -6,52 +6,53 @@
 #include <iostream>
 
 #include "utils/Input.h"
-
+ 
 App::App()
 {
 	m_VAO = m_VBO = m_EBO = 0;
 
 	m_ShaderProgram = new ShaderProgram("assets/shaders/shader.vs.glsl", "assets/shaders/shader.fs.glsl");
+	m_Texture = new Texture("assets/textures/brick/COLOR.png");
 
 	// Model data
 	const float vertices[] = {
-		// Position					// Color
+		// Position					// Color					// Tex Coords
 
 		// FRONT FACE
-		-0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
-		 0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
-		 0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// TOP-RIGHT
-		-0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 1.0f, 1.0f,		// TOP-LEFT
+		-0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 
 		// RIGHT FACE
-		 0.5f, -0.5f,  0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
-		 0.5f, -0.5f, -0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
-		 0.5f,  0.5f, -0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// TOP-RIGHT
-		 0.5f,  0.5f,  0.5f,		1.0f, 0.0f, 0.0f, 1.0f,		// TOP-LEFT
+		 0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		 0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 
 		 // LEFT FACE
-		-0.5f, -0.5f, -0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
-		-0.5f, -0.5f,  0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
-		-0.5f,  0.5f,  0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// TOP-RIGHT
-		-0.5f,  0.5f, -0.5f,		0.0f, 0.0f, 1.0f, 1.0f,		// TOP-LEFT
+		-0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		-0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		-0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 
 		// TOP FACE
-		-0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
-		 0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
-		 0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// TOP-RIGHT
-		-0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 0.0f, 1.0f,		// TOP-LEFT
+		-0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		 0.5f,  0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		 0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 
 		// BOTTOM FACE
-		-0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// BOTTOM-LEFT
-		 0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// BOTTOM-RIGHT
-		 0.5f, -0.5f,  0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// TOP-RIGHT
-		-0.5f, -0.5f,  0.5f,		0.0f, 1.0f, 1.0f, 1.0f,		// TOP-LEFT
+		-0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		 0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		 0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		-0.5f, -0.5f,  0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 
 		// BACK FACE
-		 0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-LEFT
-		-0.5f, -0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// BOTTOM-RIGHT
-		-0.5f,  0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// TOP-RIGHT
-		 0.5f,  0.5f, -0.5f,		0.0f, 1.0f, 0.0f, 1.0f,		// TOP-LEFT
+		 0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 0.0f,		// BOTTOM-LEFT
+		-0.5f, -0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 0.0f,		// BOTTOM-RIGHT
+		-0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		1.0f, 1.0f,		// TOP-RIGHT
+		 0.5f,  0.5f, -0.5f,		1.0f, 1.0f, 1.0f, 1.0f,		0.0f, 1.0f,		// TOP-LEFT
 	};
 	const unsigned short indices[] = { 
 		0,  1,  2,  2,  3,  0,	// Front face
@@ -70,10 +71,12 @@ App::App()
 	// Create vertex array object
 	glCreateVertexArrays(1, &m_VAO);
 	glBindVertexArray(m_VAO);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)0);		// Position attrib
-	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 7, (const void*)12);	// Color attrib
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (const void*)0);		// Position attrib
+	glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (const void*)12);	// Color attrib
+	glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 9, (const void*)28);	// Texture Coords attrib
 	glEnableVertexArrayAttrib(m_VAO, 0);
 	glEnableVertexArrayAttrib(m_VAO, 1);
+	glEnableVertexArrayAttrib(m_VAO, 2);
 	
 	// Create element array object
 	glCreateBuffers(1, &m_EBO);
@@ -126,6 +129,8 @@ void App::Render()
 	m_ShaderProgram->Activate();
 	m_ShaderProgram->SetUniformMat4("u_ViewMatrix", m_Camera.GetViewMatrix());
 	m_ShaderProgram->SetUniformMat4("u_ProjectionMatrix", m_Camera.GetProjectionMatrix());
+
+	m_Texture->Activate();
 
 	glBindVertexArray(m_VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_EBO);

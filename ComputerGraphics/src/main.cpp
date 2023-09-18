@@ -65,7 +65,7 @@ int main(int argc, char** argv)
 	while (!glfwWindowShouldClose(window))
 	{
 		// Update & Render app
-		app->Update(deltaTime);
+		app->Update(static_cast<float>(deltaTime));
 		app->Render();
 
 		Input::Update();
