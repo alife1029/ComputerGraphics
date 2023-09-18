@@ -112,10 +112,10 @@ void App::Update(float deltaTime)
 
 	// Move camera
 	const float cameraSpeed = 5.0f;
-	if (Input::IsKeyPress(Key::KEY_W)) m_Camera.position += m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
-	if (Input::IsKeyPress(Key::KEY_A)) m_Camera.position -= m_Camera.GetRightVector() * deltaTime * cameraSpeed;
-	if (Input::IsKeyPress(Key::KEY_S)) m_Camera.position -= m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
-	if (Input::IsKeyPress(Key::KEY_D)) m_Camera.position += m_Camera.GetRightVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPressed(Key::KEY_W)) m_Camera.position += m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPressed(Key::KEY_A)) m_Camera.position -= m_Camera.GetRightVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPressed(Key::KEY_S)) m_Camera.position -= m_Camera.GetFrontVector() * deltaTime * cameraSpeed;
+	if (Input::IsKeyPressed(Key::KEY_D)) m_Camera.position += m_Camera.GetRightVector() * deltaTime * cameraSpeed;
 
 	// Update camera
 	m_Camera.Update();

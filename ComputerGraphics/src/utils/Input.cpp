@@ -4,18 +4,23 @@
 
 // Initialize vars
 bool Input::keyStates[348] = { 0 };
+bool Input::lastKeyStates[348] = { 0 };
 glm::dvec2 Input::cursorPos = glm::vec2{ 0 };
 glm::dvec2 Input::cursorDelta = glm::vec2{ 0 };
 
 // Set listeners
-void Input::SetListener(GLFWwindow* window)
+void Input::SetListener(Window* window)
 {
-	glfwSetKeyCallback(window, glfw_key_callback);						// Key callback
-	glfwSetCursorPosCallback(window, glfw_cursor_position_callback);	// Curor callback
+	glfwSetKeyCallback(window->m_WindowHandle, glfw_key_callback);						// Key callback
+	glfwSetCursorPosCallback(window->m_WindowHandle, glfw_cursor_position_callback);	// Curor callback
 }
 
 void Input::Update()
 {
+	// Copy current keystates to the last key states
+	for (size_t i = 0; i < std::size(keyStates); i++)
+		lastKeyStates[i] = keyStates[i];
+
 	cursorDelta = glm::dvec2(0.0f);
 }
 

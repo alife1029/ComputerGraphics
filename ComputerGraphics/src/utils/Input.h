@@ -4,6 +4,8 @@
 
 #include <array>
 
+#include "Window.hpp"
+
 struct GLFWwindow;
 
 enum class Key
@@ -133,7 +135,9 @@ enum class Key
 class Input
 {
 public:
-    static bool IsKeyPress(Key key);
+    static bool IsKeyPressed(Key key);
+    static bool IsKeyJustPressed(Key key);
+    static bool IsKeyJustReleased(Key key);
 
     inline static glm::vec2 GetCursorPos();
     inline static float GetCursorPosX();
@@ -143,22 +147,37 @@ public:
 	inline static float GetCursorDeltaX();
 	inline static float GetCursorDeltaY();
 
-	static void SetListener(GLFWwindow* window);
+	static void SetListener(Window* window);
     static void Update();
 
 private:
 	static bool keyStates[348];
+    static bool lastKeyStates[348];
 	static glm::dvec2 cursorDelta, cursorPos;
 private:
 	static void glfw_key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	static void glfw_cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
 };
 
-inline bool Input::IsKeyPress(Key key)
+inline bool Input::IsKeyPressed(Key key)
 {
     const unsigned short _key = static_cast<unsigned short>(key);
     if (_key > std::size(keyStates) - 1) return false;
     return keyStates[_key];
+}
+
+inline bool Input::IsKeyJustPressed(Key key)
+{
+    const unsigned short _key = static_cast<unsigned short>(key);
+    if (_key > std::size(keyStates) - 1) return false;
+    return keyStates[_key] && !lastKeyStates[_key];
+}
+
+inline bool Input::IsKeyJustReleased(Key key)
+{
+    const unsigned short _key = static_cast<unsigned short>(key);
+    if (_key > std::size(keyStates) - 1) return false;
+    return !keyStates[_key] && lastKeyStates[_key];
 }
 
 inline glm::vec2 Input::GetCursorPos()

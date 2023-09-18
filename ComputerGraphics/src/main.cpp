@@ -6,6 +6,7 @@
 
 #include "App.h"
 #include "utils/Input.h"
+#include "utils/Window.hpp"
 
 int main(int argc, char** argv)
 {
@@ -17,21 +18,11 @@ int main(int argc, char** argv)
 		return -1;
 	}
 
-	// Antialiasing
-	glfwWindowHint(GLFW_SAMPLES, 8);
-
 	// Window creation
-	GLFWwindow* window = glfwCreateWindow(1024, 680, "Computer Graphics Playground", NULL, NULL);
-	if (!window)
-	{
-		// If window did not created, terminate GLFW then close the program
-		std::cout << "Falied to create GLFW window!" << std::endl;
-		glfwTerminate();
-		return -1;
-	}
+	Window* window = new Window();
 
 	// Make the window we created the target rendering window
-	glfwMakeContextCurrent(window);
+	window->SetAsTargetRenderingWindow();
 
 	// Load Modern OpenGL features
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -39,7 +30,7 @@ int main(int argc, char** argv)
 		std::cout << "Failed to load Modern OpenGL!" << std::endl;
 
 		// If it is failed, delete window, terminate GLFW and close the program
-		glfwDestroyWindow(window);
+		delete window;
 		glfwTerminate();
 		return -1;
 	}
@@ -54,7 +45,6 @@ int main(int argc, char** argv)
 	double deltaTime = 0.0;
 
 	int lastTitleChange = 0;
-	bool cursorHidden = false;
 
 	// Create app insance
 	App* app = new App();
@@ -62,7 +52,7 @@ int main(int argc, char** argv)
 	// V-Sync
 	glfwSwapInterval(1);
 
-	while (!glfwWindowShouldClose(window))
+	while (!window->ShouldClose())
 	{
 		// Update & Render app
 		app->Update(static_cast<float>(deltaTime));
@@ -72,7 +62,7 @@ int main(int argc, char** argv)
 
 		// Poll events and swap framebuffers
 		glfwPollEvents();
-		glfwSwapBuffers(window);
+		window->SwapBuffers();
 
 		// Update time
 		deltaTime = glfwGetTime() - timeStamp;
@@ -85,15 +75,14 @@ int main(int argc, char** argv)
 				std::ostringstream oss;
 				oss << "Computer Graphics Playground (" << int(1 / deltaTime) << " FPS)";
 				std::string newTitle = oss.str();
-				glfwSetWindowTitle(window, newTitle.c_str());
+				window->SetTitle(newTitle.c_str());
 
 				lastTitleChange = int(timeStamp * 5);
 			}
 
-			if (Input::IsKeyPress(Key::KEY_F11))
+			if (Input::IsKeyJustPressed(Key::KEY_F11))
 			{
-				cursorHidden = !cursorHidden;
-				glfwSetInputMode(window, GLFW_CURSOR, cursorHidden ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+				window->ToggleCursorVisibility();
 			}
 		}
 	}
